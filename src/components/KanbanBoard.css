@@ -1,10 +1,12 @@
 .kanban-board {
   display: flex;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
   padding: var(--spacing-xl);
-  overflow-x: auto;
   min-height: calc(100vh - 100px);
   align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Center the board on larger screens */
@@ -14,11 +16,20 @@
   }
 }
 
-/* Responsive stacking */
-@media (max-width: 768px) {
+/* Medium screens */
+@media (max-width: 1100px) {
+  .kanban-board {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+}
+
+/* Tablet - stack columns vertically */
+@media (max-width: 900px) {
   .kanban-board {
     flex-direction: column;
     padding: var(--spacing-md);
     gap: var(--spacing-lg);
+    min-height: auto;
   }
 }
