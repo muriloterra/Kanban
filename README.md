@@ -62,10 +62,4 @@ src/
 | `npm run build`   | Gera build de produção             |
 | `npm run preview` | Preview do build local             |
 
-## 👨‍💻 Autor
 
-Desenvolvido por **Murilo Terra**
-
----
-
-⭐ Se gostou do projeto, deixe uma estrela!
