@@ -1,0 +1,192 @@
+.kanban-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  cursor: grab;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.3s ease forwards;
+  overflow: hidden;
+}
+
+.kanban-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+  transform: rotate(2deg) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+/* Dragging state */
+.kanban-card.dragging {
+  opacity: 1;
+  transform: rotate(3deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+/* Card Glow Effect */
+.card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-glow);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.kanban-card:hover .card-glow {
+  opacity: 1;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.priority-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.priority-low {
+  background: rgba(107, 203, 119, 0.15);
+  color: var(--done-color);
+}
+
+.priority-medium {
+  background: rgba(255, 217, 61, 0.15);
+  color: var(--progress-color);
+}
+
+.priority-high {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all var(--transition-fast);
+}
+
+.kanban-card:hover .card-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.action-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.action-btn:hover {
+  color: var(--text-primary);
+}
+
+.edit-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  color: var(--primary);
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Card Content */
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.4;
+}
+
+.card-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-sm);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
+}
+
+.card-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.card-date svg {
+  width: 14px;
+  height: 14px;
+}

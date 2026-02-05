@@ -1,0 +1,184 @@
+.kanban-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 340px;
+  max-width: 380px;
+  height: calc(100vh - 140px);
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: slideInRight 0.4s ease forwards;
+  animation-delay: calc(var(--column-index, 0) * 0.1s);
+  transition: all var(--transition-normal);
+}
+
+.kanban-column:nth-child(1) {
+  --column-index: 0;
+}
+.kanban-column:nth-child(2) {
+  --column-index: 1;
+}
+.kanban-column:nth-child(3) {
+  --column-index: 2;
+}
+
+.kanban-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--column-color);
+  box-shadow: 0 0 20px var(--column-color);
+}
+
+.kanban-column:hover {
+  border-color: var(--column-color);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--column-color) 20%, transparent);
+}
+
+/* Column Glow Effect */
+.column-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--column-color) 10%, transparent) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.kanban-column:hover .column-glow {
+  opacity: 1;
+}
+
+/* Column Header */
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.column-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.column-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--column-color);
+}
+
+.column-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.column-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.task-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 var(--spacing-sm);
+  background: color-mix(in srgb, var(--column-color) 15%, transparent);
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--column-color);
+}
+
+/* Column Content */
+.column-content {
+  flex: 1;
+  padding: var(--spacing-md);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  transition: all var(--transition-normal);
+}
+
+.empty-state svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--spacing-sm);
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.kanban-column.drag-over .empty-state,
+.kanban-column:has(.cards-container):hover .empty-state {
+  border-color: var(--column-color);
+  color: var(--column-color);
+}
+
+/* Drag Over State */
+.kanban-column.drag-over {
+  background: rgba(26, 26, 46, 0.9);
+  border-color: var(--column-color);
+  box-shadow:
+    0 0 30px color-mix(in srgb, var(--column-color) 30%, transparent),
+    inset 0 0 30px color-mix(in srgb, var(--column-color) 5%, transparent);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .kanban-column {
+    min-width: 300px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kanban-column {
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+}
